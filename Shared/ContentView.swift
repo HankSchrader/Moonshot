@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    let astronauts = Bundle.main.decode("astronauts.json")
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Text("\(astronauts.count)")
     }
+          
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct CustomText: View {
+    var text: String
+    var body: some View {
+        Text(text)
+    }
+    
+    init(_ text: String) {
+        print("Creating a new CustomText")
+        self.text = text
     }
 }
