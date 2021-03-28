@@ -13,25 +13,29 @@ struct MissionView: View {
         let role: String
         let astronaut: Astronaut
     }
-    
+    var missions: [Mission] = Bundle.main.decode("missions.json")
     var mission: Mission
     let astronauts: [CrewMember]
     var body: some View {
         GeometryReader { geometry in
             ScrollView(.vertical) {
                 VStack {
-                    Image(self.mission.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: geometry.size.width * 0.7)
-                        .padding(.top)
-                        
+                    VStack {
+                        Image(self.mission.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: geometry.size.width * 0.7)
+                            .padding(.top)
+                            
+                        Text(self.mission.formattedLaunchDate)
+                    }
+          
                     Text(self.mission.description)
                         .padding()
                     
                     ForEach(self.astronauts, id: \.role) {
                         crewMember in
-                        NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut)) {
+                        NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut, missions: self.missions)) {
                             HStack {
                                     Image(crewMember.astronaut.id)
                                         .resizable()

@@ -31,7 +31,7 @@ struct Mission: Codable, Identifiable {
             formatter.dateStyle = .long
             return formatter.string(from: launchDate)
         }
-        return "NA"
+        return "N/A"
     }
     
 }
